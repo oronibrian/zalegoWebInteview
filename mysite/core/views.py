@@ -2,8 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 
-from mysite.core.forms import SignUpForm
-
+from mysite.core.forms import SignUpForm,UserProfileForm
+from django.views.generic import UpdateView
+from .models import Profile
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 @login_required
 def home(request):
@@ -25,3 +27,10 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
+
+class EditUserProfileView(LoginRequiredMixin,UpdateView):
+    model = Profile
+
+    form_class = UserProfileForm
+    template_name = "profile.html"

@@ -1,9 +1,9 @@
-from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from .models import Profile
+# Zalego web Interview
 
+## Developed using django 
 
+#### Sample code
+```python
 class SignUpForm(UserCreationForm):
     # birth_date = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
 	LANG = (
@@ -26,14 +26,10 @@ class SignUpForm(UserCreationForm):
 	    fields = ('first_name', 'last_name','username', 'gender','language', 'password1', 'password2', )
 
 
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ('gender', 'language') #Note that we didn't mention user field here.
 
-    def save(self, user=None):
-        user_profile = super(UserProfileForm, self).save(commit=False)
-        if user:
-            user_profile.user = user
-        user_profile.save()
-        return user_profile
+```
+
+## Instruction to run
+1.Clone repo
+2.Install requiremets.txt
+3.python manage.py runserver

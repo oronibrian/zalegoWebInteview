@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 
 from mysite.core import views as core_views
-
+from mysite. core.views import EditUserProfileView
 
 urlpatterns = [
     url(r'^$', core_views.home, name='home'),
@@ -12,5 +12,7 @@ urlpatterns = [
 
 	url('^', include('django.contrib.auth.urls')),
     url(r'^password_reset/$', auth_views.password_reset, {'template_name': 'accounts/reset_password.html'}),
+    
+    url('^update/(?P<pk>[0-9]+)/$', EditUserProfileView.as_view(), name='Update'),
 
 ]
