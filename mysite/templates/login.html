@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block content %}
+  <h2>Log in to My Site</h2>
+  {% if form.errors %}
+    <p style="color: red">Your username and password didn't match. Please try again.</p>
+  {% endif %}
+  <form class="form-inline"  method="post">
+    {% csrf_token %}
+
+    <input type="hidden" name="next" value="{{ next }}" />
+    {% for field in form %}
+      <p>
+        {{ field|bootstrap}}<br>
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+       
+      </p>
+    {% endfor %}
+    <button class="btn btn-primary" type="submit">Log in</button>
+    <a href="{% url 'signup' %}">New to Zalego? Sign up</a>
+  </form>
+{% endblock %}
